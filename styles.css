@@ -1,5 +1,5 @@
 :root {
-    /* Main colors inspired by The Book of HOV */
+   
     --primary-color: #000000; /* Black */
     --secondary-color: #d4af37; /* Gold */
     --bg-color: #ffffff; /* Clean white */
@@ -142,7 +142,7 @@ canvas {
     object-fit: contain;
 }
 
-/* Sidebar */
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -198,7 +198,6 @@ label {
     outline: none;
 }
 
-/* Sliders */
 .slider-container {
     display: flex;
     align-items: center;
@@ -253,7 +252,6 @@ input[type="range"]:active::-moz-range-thumb {
     font-weight: 400;
 }
 
-/* Palette selector */
 .palette-selector {
     display: flex;
     flex-direction: column;
@@ -307,7 +305,6 @@ input[type="range"]:active::-moz-range-thumb {
     color: var(--text-dark);
 }
 
-/* Presets */
 .preset-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -332,7 +329,6 @@ input[type="range"]:active::-moz-range-thumb {
     color: white;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 2rem 0;
@@ -343,7 +339,6 @@ footer {
     border-top: 1px solid var(--gray-300);
 }
 
-/* Responsive adjustments */
 @media (max-width: 1400px) {
     main {
         grid-template-columns: minmax(0, 1fr) 300px;
@@ -406,12 +401,10 @@ footer {
     }
 }
 
-/* Gold accent styles */
 .accent-gold {
     color: var(--secondary-color);
 }
 
-/* Add gold hover effect to certain elements */
 .select-styled:focus, 
 .btn:focus,
 .preset-btn:focus {
@@ -419,13 +412,11 @@ footer {
     outline: none;
 }
 
-/* Special gold hover effects */
 .title-stack span:hover {
     color: var(--secondary-color);
     cursor: default;
 }
 
-/* Add special styling for the gold palette */
 .gold-palette-preview div {
     background-color: var(--secondary-color);
 }

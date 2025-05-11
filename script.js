@@ -1,4 +1,3 @@
-// Color palettes - inspired by The Book of HOV with gold as a primary palette
 const palettes = {
     gold: ['#d4af37', '#caa52a', '#bf9b22', '#b7922d', '#aa8a2a', '#9c7521', '#8e6516', '#4d3b17'], // Gold Accent
     mono: ['#000000', '#1a1a1a', '#333333', '#4d4d4d', '#666666', '#808080', '#999999', '#b3b3b3'], // Monochrome
@@ -7,7 +6,6 @@ const palettes = {
     vibrant: ['#ff2702', '#f65314', '#f8961e', '#fcd300', '#6b9404', '#009688', '#004d80', '#6236ff']  // Vibrant
 };
 
-// Presets with minimalist approach
 const presets = {
     sketch: {
         brushType: '2B',
@@ -51,26 +49,19 @@ const presets = {
     }
 };
 
-// Canvas variable
 let canvas;
 let fieldTime = 0;
 let canvasInitialized = false;
 
-// Initialize UI elements
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize slider value displays
     initSliderValues();
     
-    // Initialize palette preview
     updatePalettePreview();
     
-    // Add event listeners to presets
     initPresets();
     
-    // Listen for palette changes
     document.getElementById('colorPalette').addEventListener('change', updatePalettePreview);
     
-    // Subtle hover effect for title
     const titleSpans = document.querySelectorAll('.title-stack span');
     titleSpans.forEach(span => {
         span.addEventListener('mouseenter', function() {
@@ -83,9 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Initialize slider value displays with clean minimal design
 function initSliderValues() {
-    // Weight slider
     const weightSlider = document.getElementById('weight');
     const weightValue = document.getElementById('weight-value');
     weightValue.textContent = parseFloat(weightSlider.value).toFixed(1);
@@ -94,7 +83,6 @@ function initSliderValues() {
         weightValue.textContent = parseFloat(this.value).toFixed(1);
     });
     
-    // Density slider
     const densitySlider = document.getElementById('density');
     const densityValue = document.getElementById('density-value');
     densityValue.textContent = densitySlider.value;
@@ -103,7 +91,6 @@ function initSliderValues() {
         densityValue.textContent = this.value;
     });
     
-    // Complexity slider
     const complexitySlider = document.getElementById('complexity');
     const complexityValue = document.getElementById('complexity-value');
     complexityValue.textContent = complexitySlider.value;
@@ -112,7 +99,6 @@ function initSliderValues() {
         complexityValue.textContent = this.value;
     });
     
-    // Background opacity slider
     const bgOpacitySlider = document.getElementById('backgroundOpacity');
     const bgOpacityValue = document.getElementById('bg-opacity-value');
     bgOpacityValue.textContent = bgOpacitySlider.value + '%';
@@ -122,7 +108,6 @@ function initSliderValues() {
     });
 }
 
-// Initialize preset buttons with minimal design
 function initPresets() {
     const presetButtons = document.querySelectorAll('.preset-btn');
     
@@ -134,13 +119,11 @@ function initPresets() {
     });
 }
 
-// Apply a preset with clean transitions
 function applyPreset(presetName) {
     const preset = presets[presetName];
     
     if (!preset) return;
     
-    // Set all values from the preset
     document.getElementById('brushType').value = preset.brushType;
     document.getElementById('fieldType').value = preset.fieldType;
     document.getElementById('colorPalette').value = preset.colorPalette;
@@ -150,37 +133,30 @@ function applyPreset(presetName) {
     document.getElementById('backgroundType').value = preset.backgroundType;
     document.getElementById('backgroundOpacity').value = preset.backgroundOpacity;
     
-    // Update displays
     document.getElementById('weight-value').textContent = parseFloat(preset.weight).toFixed(1);
     document.getElementById('density-value').textContent = preset.density;
     document.getElementById('complexity-value').textContent = preset.complexity;
     document.getElementById('bg-opacity-value').textContent = preset.backgroundOpacity + '%';
     
-    // Update palette preview
     updatePalettePreview();
     
-    // Generate new artwork
     canvasInitialized = true;
     redraw();
 }
 
-// Update palette preview with clean minimal design
 function updatePalettePreview() {
     const paletteSelect = document.getElementById('colorPalette');
     const palettePreview = document.getElementById('palette-preview');
     const selectedPalette = palettes[paletteSelect.value];
     
-    // Clear previous preview
     palettePreview.innerHTML = '';
     
-    // Add gold class if gold palette is selected
     if (paletteSelect.value === 'gold') {
         palettePreview.classList.add('gold-palette-preview');
     } else {
         palettePreview.classList.remove('gold-palette-preview');
     }
     
-    // Create color blocks
     selectedPalette.forEach(color => {
         const colorBlock = document.createElement('div');
         colorBlock.style.backgroundColor = color;
@@ -188,51 +164,40 @@ function updatePalettePreview() {
     });
 }
 
-// p5.js setup function
 function setup() {
-    // Create canvas in WEBGL mode as required by p5.brush
-    // Use windowWidth to make canvas responsive and larger
+    
     const canvasSize = min(windowWidth * 0.85, 1000);
     canvas = createCanvas(canvasSize, canvasSize, WEBGL);
     canvas.parent('canvas-container');
     
-    // Load p5.brush
     brush.load();
     
-    // Set random seed for consistency
     const seedValue = random(10000);
     brush.seed(seedValue);
     
-    // Don't loop by default - we'll redraw when generate button is clicked
     noLoop();
     
-    // Handle window resize
     window.addEventListener('resize', function() {
         const newCanvasSize = min(windowWidth * 0.85, 1000);
         resizeCanvas(newCanvasSize, newCanvasSize);
         redraw();
     });
     
-    // Add event listeners to buttons
     document.getElementById('generate').addEventListener('click', function() {
-        // Generate new artwork with a different seed for variation
         brush.seed(random(10000));
         redraw();
     });
     
     document.getElementById('save').addEventListener('click', function() {
-        // Add timestamp to filename to prevent overwriting
         const timestamp = Date.now().toString().slice(-4);
         saveCanvas(canvas, `artwork-${timestamp}`, 'png');
     });
 }
 
-// Helper function to get a random item from an array
 function getRandomItem(array) {
     return array[Math.floor(random(array.length))];
 }
 
-// Generate a random point with Gaussian distribution around center
 function getRandomPoint(centerX, centerY, spread) {
     return {
         x: centerX + randomGaussian(0, spread),
@@ -240,22 +205,18 @@ function getRandomPoint(centerX, centerY, spread) {
     };
 }
 
-// Create organic shape with clean minimalist aesthetic
 function createOrganicShape(centerX, centerY, radius, color, opacity) {
     brush.noStroke();
     brush.fill(color, opacity);
     
-    // Add texture and bleed for natural media simulation
     brush.fillTexture(random(0.2, 0.4), random(0.3, 0.5));
     brush.bleed(random(0.1, 0.2), "out");
     
-    // Create points for an irregular polygon with cleaner lines
     const numPoints = floor(random(5, 8));
     const points = [];
     
     for (let i = 0; i < numPoints; i++) {
         const angle = i * TWO_PI / numPoints;
-        // Less variation for cleaner shapes
         const r = radius * (0.85 + random(0.3));
         points.push([
             centerX + cos(angle) * r,
@@ -266,7 +227,6 @@ function createOrganicShape(centerX, centerY, radius, color, opacity) {
     brush.polygon(points);
 }
 
-// p5.js draw function - with minimalist aesthetic inspired by The Book of HOV
 function draw() {
     // Clear background
     background(255);
@@ -279,29 +239,23 @@ function draw() {
     const density = parseInt(document.getElementById('density').value);
     const complexity = parseInt(document.getElementById('complexity').value);
     
-    // Scale weight based on canvas size
-    const scaleFactor = width / 600; // Scale relative to original 600px design
+    const scaleFactor = width / 600; 
     const weight = parseFloat(document.getElementById('weight').value) * scaleFactor;
     
-    // Set field if selected
     if (fieldType !== 'none') {
         brush.field(fieldType);
-        // Update field time for animation effect
         fieldTime += 0.05 * complexity;
         brush.refreshField(fieldTime);
     } else {
         brush.noField();
     }
     
-    // Get background settings
     const backgroundType = document.getElementById('backgroundType').value;
     const backgroundOpacity = parseInt(document.getElementById('backgroundOpacity').value);
     
-    // Draw background texture based on selected type
     if (backgroundType !== 'none') {
         switch (backgroundType) {
             case 'subtle':
-                // Subtle shapes with cleaner lines
                 for (let i = 0; i < 5; i++) {
                     const bgColor = getRandomItem(selectedPalette);
                     createOrganicShape(
@@ -315,7 +269,6 @@ function draw() {
                 break;
                 
             case 'wash':
-                // Watercolor wash effect with cleaner edges
                 for (let i = 0; i < 4; i++) {
                     const bgColor = getRandomItem(selectedPalette);
                     
@@ -337,7 +290,6 @@ function draw() {
                 break;
                 
             case 'grid':
-                // Grid pattern with cleaner lines
                 const gridSize = random(30, 40);
                 const gridRows = ceil(500 / gridSize);
                 const gridCols = ceil(500 / gridSize);
@@ -348,7 +300,6 @@ function draw() {
                 for (let i = 0; i < gridRows; i++) {
                     for (let j = 0; j < gridCols; j++) {
                         if (random() < 0.7) {
-                            // Add minimal variation to grid for cleaner look
                             const x = -250 + j * gridSize + random(-2, 2);
                             const y = -250 + i * gridSize + random(-2, 2);
                             const bgColor = getRandomItem(selectedPalette);
@@ -370,11 +321,9 @@ function draw() {
                 break;
                 
             case 'noise':
-                // Noise texture with minimal aesthetic
                 brush.push();
                 brush.pick("spray");
                 
-                // Create sparse dots for a cleaner look
                 for (let i = 0; i < 300; i++) {
                     const x = random(-280, 280);
                     const y = random(-280, 280);
@@ -392,7 +341,6 @@ function draw() {
         }
     }
     
-    // Create composition with cleaner focal points
     const focalPoints = [];
     for (let i = 0; i < 2; i++) {
         // Create balanced focal points
@@ -408,7 +356,6 @@ function draw() {
         });
     }
     
-    // Draw main strokes with cleaner aesthetic
     for (let i = 0; i < density; i++) {
         // Pick a random color from the palette
         const strokeColor = getRandomItem(selectedPalette);
@@ -531,7 +478,6 @@ function draw() {
         }
     }
     
-    // Add hatched shapes with cleaner aesthetic
     for (let i = 0; i < density / 15; i++) {
         const hatchColor = getRandomItem(selectedPalette);
         
@@ -545,7 +491,6 @@ function draw() {
             gradient: random(0, 0.2)
         });
         
-        // Random position with bias toward focal points
         let x, y;
         const useFocalPoint = random() < 0.6;
         
@@ -561,14 +506,11 @@ function draw() {
         
         const size = random(20, 50);
         
-        // Simple rectangle for cleaner look
         brush.rect(x, y, size, size);
     }
     
-    // Make sure everything is properly drawn to the canvas
     brush.reDraw();
     brush.reBlend();
     
-    // Mark canvas as initialized
     canvasInitialized = true;
 }
