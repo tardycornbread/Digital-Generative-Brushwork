@@ -1,0 +1,431 @@
+:root {
+    /* Main colors inspired by The Book of HOV */
+    --primary-color: #000000; /* Black */
+    --secondary-color: #d4af37; /* Gold */
+    --bg-color: #ffffff; /* Clean white */
+    --text-color: #000000; /* Sharp black for text */
+    --accent-color: #d4af37; /* Gold accent */
+    
+    /* Text colors */
+    --text-light: #666666;
+    --text-medium: #333333;
+    --text-dark: #000000;
+    
+    /* UI colors */
+    --gray-100: #f8f8f8;
+    --gray-200: #f0f0f0;
+    --gray-300: #e0e0e0;
+    --gray-400: #cccccc;
+    --gray-500: #999999;
+    --gray-600: #666666;
+    --gray-700: #444444;
+    --gray-800: #222222;
+    --gray-900: #111111;
+    
+    /* UI Elements */
+    --border-radius-sm: 0px;
+    --border-radius: 0px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Typography adjustments inspired by The Book of HOV */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header with stacked title, inspired by The Book of HOV */
+header {
+    padding: 3rem 0 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+}
+
+.title-stack span {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+}
+
+.title-stack span:last-child {
+    margin-bottom: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Intro text */
+.intro-text {
+    margin: 1rem 0 3rem 0;
+    max-width: 600px;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 300;
+    color: var(--text-medium);
+}
+
+/* Main content */
+main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+/* Canvas area */
+.canvas-area {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: calc(100vh - 300px);
+    max-height: 1000px;
+    width: 100%;
+    border: 1px solid var(--gray-300);
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+canvas {
+    position: relative;
+    z-index: 1;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 1000px;
+    max-height: 1000px;
+    object-fit: contain;
+}
+
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.section {
+    position: relative;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--gray-300);
+    padding-bottom: 0.8rem;
+}
+
+.control {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+    color: var(--text-medium);
+}
+
+.select-styled {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--gray-300);
+    background-color: var(--bg-color);
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1em;
+}
+
+.select-styled:hover, .select-styled:focus {
+    border-color: var(--text-dark);
+    outline: none;
+}
+
+/* Sliders */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--gray-300);
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    background: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    background: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:active::-webkit-slider-thumb {
+    background: var(--secondary-color);
+}
+
+input[type="range"]:hover::-moz-range-thumb,
+input[type="range"]:active::-moz-range-thumb {
+    background: var(--secondary-color);
+}
+
+.slider-value {
+    min-width: 40px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    font-weight: 400;
+}
+
+/* Palette selector */
+.palette-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.palette-preview {
+    height: 30px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid var(--gray-300);
+}
+
+.palette-preview div {
+    flex: 1;
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.5rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    border: 1px solid var(--text-dark);
+    background-color: transparent;
+    color: var(--text-dark);
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: var(--text-dark);
+    color: white;
+}
+
+.btn-primary {
+    background-color: var(--text-dark);
+    color: white;
+    border: 1px solid var(--text-dark);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--text-dark);
+}
+
+/* Presets */
+.preset-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.preset-btn {
+    padding: 0.8rem 0.5rem;
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.preset-btn:hover {
+    background-color: var(--text-dark);
+    color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    border-top: 1px solid var(--gray-300);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    main {
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 2rem;
+    }
+    
+    .title-stack span {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .canvas-area {
+        min-height: 70vh;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    
+    .title-stack span {
+        font-size: 1.6rem;
+    }
+    
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-actions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .btn {
+        min-width: 45%;
+    }
+    
+    .intro-text p {
+        font-size: 1rem;
+    }
+    
+    .canvas-area {
+        min-height: 60vh;
+    }
+}
+
+/* Gold accent styles */
+.accent-gold {
+    color: var(--secondary-color);
+}
+
+/* Add gold hover effect to certain elements */
+.select-styled:focus, 
+.btn:focus,
+.preset-btn:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+/* Special gold hover effects */
+.title-stack span:hover {
+    color: var(--secondary-color);
+    cursor: default;
+}
+
+/* Add special styling for the gold palette */
+.gold-palette-preview div {
+    background-color: var(--secondary-color);
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Generation</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5.brush"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-title">
+                <div class="title-stack">
+                    <span>Digital</span>
+                    <span>Generative</span>
+                    <span>Brushwork</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="save" class="btn">
+                    <span>Save Artwork</span>
+                </button>
+                <button id="generate" class="btn btn-primary">
+                    <span>Generate</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="intro-text">
+            <p>Create art through algorithmic expression. Select parameters and compose a unique visual experience.</p>
+        </div>
+
+        <main>
+            <div class="canvas-area">
+                <div id="canvas-container"></div>
+            </div>
+
+            <div class="sidebar">
+                <div class="section">
+                    <h2>I • Brush</h2>
+                    <div class="control">
+                        <label for="brushType">Brush Type</label>
+                        <select id="brushType" class="select-styled">
+                            <option value="2B">2B Pencil</option>
+                            <option value="HB">HB Pencil</option>
+                            <option value="2H">2H Pencil</option>
+                            <option value="cpencil">Color Pencil</option>
+                            <option value="pen">Pen</option>
+                            <option value="rotring">Rotring</option>
+                            <option value="spray">Spray</option>
+                            <option value="marker">Marker</option>
+                            <option value="marker2">Marker 2</option>
+                            <option value="charcoal">Charcoal</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <label for="weight">Brush Weight</label>
+                        <div class="slider-container">
+                            <input type="range" id="weight" min="0.5" max="3" value="1" step="0.1">
+                            <div class="slider-value" id="weight-value">1.0</div>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label for="density">Stroke Density</label>
+                        <div class="slider-container">
+                            <input type="range" id="density" min="10" max="100" value="30">
+                            <div class="slider-value" id="density-value">30</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>II • Palette</h2>
+                    <div class="control">
+                        <label for="colorPalette">Color Palette</label>
+                        <div class="palette-selector">
+                            <select id="colorPalette" class="select-styled">
+                                <option value="gold">Gold Accent</option>
+                                <option value="mono">Monochrome</option>
+                                <option value="warm">Warm Tones</option>
+                                <option value="cool">Cool Tones</option>
+                                <option value="vibrant">Vibrant</option>
+                            </select>
+                            <div class="palette-preview" id="palette-preview"></div>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label for="backgroundType">Background</label>
+                        <select id="backgroundType" class="select-styled">
+                            <option value="none">None</option>
+                            <option value="subtle" selected>Subtle Texture</option>
+                            <option value="wash">Watercolor Wash</option>
+                            <option value="grid">Grid Pattern</option>
+                            <option value="noise">Noise Texture</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <label for="backgroundOpacity">Opacity</label>
+                        <div class="slider-container">
+                            <input type="range" id="backgroundOpacity" min="5" max="40" value="15">
+                            <div class="slider-value" id="bg-opacity-value">15%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>III • Motion</h2>
+                    <div class="control">
+                        <label for="fieldType">Vector Field</label>
+                        <select id="fieldType" class="select-styled">
+                            <option value="none">None</option>
+                            <option value="curved">Curved</option>
+                            <option value="truncated">Truncated</option>
+                            <option value="zigzag">Zigzag</option>
+                            <option value="seabed">Seabed</option>
+                            <option value="waves">Waves</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <label for="complexity">Field Complexity</label>
+                        <div class="slider-container">
+                            <input type="range" id="complexity" min="1" max="10" value="5">
+                            <div class="slider-value" id="complexity-value">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section presets">
+                    <h2>IV • Presets</h2>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="sketch">Pencil Sketch</button>
+                        <button class="preset-btn" data-preset="watercolor">Watercolor</button>
+                        <button class="preset-btn" data-preset="abstract">Abstract</button>
+                        <button class="preset-btn" data-preset="technical">Technical</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Created with p5.js and p5.brush</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
